@@ -11,7 +11,7 @@
   "observability": {
     "enabled": true
   },
-  "workers_dev": false,
+  "workers_dev": true,
   "preview_urls": false,
   "services": [
     {
