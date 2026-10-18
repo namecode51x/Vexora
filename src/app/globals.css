@@ -80,6 +80,49 @@
   --sidebar-ring: rgba(255, 255, 255, 0.3);
 }
 
+/* ═══ VEXORA StyleKit (--ve-*) ═══
+   Espejo CSS de Vexora_App/src/StyleKit.h (geometría + luz).
+   REGLA FUNDAMENTAL: aqui NO hay ningun color nuevo. Todas las veladuras
+   son blancas a muy baja opacidad (luminancia de la misma paleta) para dar
+   volumen tipo NVIDIA App sin tocar un solo tono. */
+:root {
+  /* Radios (escala 4/8) — mismos valores que ve::kRad* */
+  --ve-radius-sm: 10px;  /* filas internas, chips */
+  --ve-radius-md: 12px;  /* botones secundarios */
+  --ve-radius-lg: 18px;  /* tarjeta estandar */
+  --ve-radius-xl: 20px;  /* tarjeta hero */
+
+  /* Veladuras verticales (luz cenital -> base, sobre el bg existente) */
+  --ve-veil-card: linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.012));
+  --ve-veil-side: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.012) 55%, rgba(255, 255, 255, 0));
+  --ve-veil-btn: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.02));
+
+  /* Bruma radial del fondo (luminancia, no cromatica) */
+  --ve-mist: radial-gradient(90% 70% at 42% 28%, rgba(255, 255, 255, 0.045), transparent 62%);
+
+  /* Luz: rim interior + borde externo (blanco al 8-14%) */
+  --ve-rim-a: 0.14;
+  --ve-edge-a: 0.1;
+
+  /* Elevacion multicapa (ambiente -> cuerpo -> contacto) — espejo de kShadow* */
+  --ve-elev-1:
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 8px 24px -12px rgba(0, 0, 0, 0.6);
+  --ve-elev-2:
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 12px 32px -16px rgba(0, 0, 0, 0.7),
+    0 32px 80px -32px rgba(0, 0, 0, 0.6);
+  --ve-elev-3:
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    0 16px 40px -16px rgba(0, 0, 0, 0.65),
+    0 48px 110px -36px rgba(0, 0, 0, 0.7);
+
+  /* Interaccion — identicos al C++ (kLiftDistance 2px) */
+  --ve-lift: -2px;
+  --ve-dur-state: var(--duration-quick);
+  --ve-ease-state: var(--ease-smooth-out);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -117,6 +160,44 @@
 
 .font-display {
   font-family: var(--font-space-grotesk), sans-serif;
+}
+
+/* StyleKit: veladura facial (luz desde arriba, misma paleta) */
+.ve-face {
+  background-image: var(--ve-veil-card);
+}
+.ve-veil-side {
+  background-image: var(--ve-veil-side);
+}
+/* StyleKit: bruma radial de fondo, detras del contenido */
+.ve-mist {
+  position: relative;
+}
+.ve-mist::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: var(--ve-mist);
+}
+/* StyleKit: elevacion al hover (lift -2px + sombra), 150ms smooth-out */
+.ve-hover {
+  transition:
+    transform var(--ve-dur-state) var(--ve-ease-state),
+    box-shadow var(--ve-dur-state) var(--ve-ease-state),
+    border-color var(--ve-dur-state) var(--ve-ease-state),
+    background-color var(--ve-dur-state) var(--ve-ease-state);
+  will-change: transform;
+}
+.ve-hover:hover {
+  transform: translateY(var(--ve-lift));
+}
+@media (prefers-reduced-motion: reduce) {
+  .ve-hover,
+  .ve-hover:hover {
+    transform: none;
+    transition: none;
+  }
 }
 
 .text-glow {
