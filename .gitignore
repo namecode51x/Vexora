@@ -26,5 +26,10 @@ prisma/*.db-journal
 *.pem
 Thumbs.db
 
+# wrangler / OpenNext Cloudflare
+.open-next/
+.wrangler/
+.dev.vars
+
 # app de escritorio VEXORA (tiene su propio repositorio)
 /Vexora_App/
