@@ -33,9 +33,16 @@ jobs:
         run: bunx prisma generate
 
       - name: Build estatico (GitHub Pages)
-        run: bunx next build
         env:
           STATIC_EXPORT: "1"
+        # reintenta: a veces el runner falla bajando las fuentes de Google
+        run: |
+          for i in 1 2 3; do
+            bunx next build && exit 0
+            echo "el build fallo, reintento ($i de 3)..."
+            sleep 15
+          done
+          exit 1
 
       - uses: actions/configure-pages@v5
 
