@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
   output: isStaticExport ? "export" : "standalone",
   // GitHub Pages sirve el sitio bajo /Vexora
   basePath: isStaticExport ? "/Vexora" : undefined,
+  // expuesto a los clientes para armar rutas (/downloads/...) con el basePath
+  env: {
+    NEXT_PUBLIC_BASE_PATH: isStaticExport ? "/Vexora" : "",
+  },
   images: {
     unoptimized: true,
   },

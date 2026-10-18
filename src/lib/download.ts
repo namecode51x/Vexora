@@ -4,9 +4,12 @@
 export const DOWNLOAD_FILE = "VEXORA-Setup-v1.2.0.exe";
 export const DOWNLOAD_SIZE_MB = 2.8;
 
+/* basePath del sitio ("" en local, "/Vexora" en GitHub Pages) */
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export function downloadVexora() {
   const link = document.createElement("a");
-  link.href = `/downloads/${DOWNLOAD_FILE}`;
+  link.href = `${BASE_PATH}/downloads/${DOWNLOAD_FILE}`;
   link.download = DOWNLOAD_FILE;
   document.body.appendChild(link);
   link.click();
