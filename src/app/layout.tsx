@@ -15,8 +15,11 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-/* URL pública del sitio (el export de GitHub Pages sirve bajo /Vexora) */
-const SITE_URL = "https://namecode51x.github.io/Vexora";
+/* URL canónica del sitio: el Worker de Cloudflare es la versión principal
+   (SSR completo). El export estático de GitHub Pages existe como espejo y su
+   canonical apunta al Worker para que Google no trate ambos como duplicados. */
+const SITE_URL = "https://vexora.namecode51x.workers.dev";
+const isStaticExport = process.env.STATIC_EXPORT === "1";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -38,13 +41,15 @@ export const metadata: Metadata = {
     icon: "/icon.png",
   },
   alternates: {
-    canonical: "/",
+    // El espejo de GitHub Pages apunta al Worker (canónico);
+    // el Worker se canoniza a sí mismo.
+    canonical: isStaticExport ? SITE_URL : undefined,
   },
   openGraph: {
     title: "VEXORA — Kill the delay. Feel the difference.",
     description:
       "Latency, FPS and network optimization for gamers. Faster inputs. Better results.",
-    url: "/",
+    url: isStaticExport ? SITE_URL : undefined,
     siteName: "VEXORA",
     type: "website",
   },
