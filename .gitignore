@@ -1,0 +1,30 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# builds
+*.tsbuildinfo
+
+# environment variables
+.env
+.env*.local
+.vercel
+
+# base de datos local (prisma/sqlite)
+prisma/*.db
+prisma/*.db-journal
+*.db
+
+# archivos del sistema
+.DS_Store
+*.pem
+Thumbs.db
+
+# app de escritorio VEXORA (tiene su propio repositorio)
+/Vexora_App/

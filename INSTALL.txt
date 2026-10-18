@@ -1,0 +1,46 @@
+VEXORA — Landing Page (código fuente)
+======================================
+
+Cómo instalar y correr la web en tu PC
+---------------------------------------
+Requisito: Node.js 20 o superior → https://nodejs.org
+(Opcional: Bun → https://bun.sh — más rápido)
+
+1. Descomprime este zip en una carpeta.
+2. Abre una terminal EN esa carpeta.
+3. Instala las dependencias:
+
+      npm install        (si usas Node)
+      bun install        (si usas Bun)
+
+4. Levanta la web en modo desarrollo:
+
+      npm run dev         → abre http://localhost:3000
+
+5. (Opcional) Para producción en tu PC / VPS:
+
+      npm run build
+      npm start           → sirve la versión optimizada
+
+Cómo publicarla en internet (GRATIS con Vercel)
+-----------------------------------------------
+1. Crea una cuenta en https://vercel.com (puedes entrar con GitHub).
+2. Sube este código a un repositorio en https://github.com
+3. En Vercel: "Add New..." → "Project" → importa tu repositorio.
+4. Click en "Deploy" (no hay que configurar nada: Next.js se detecta solo).
+5. En 1 minuto tendrás tu web en https://tu-nombre.vercel.app
+
+Dominio propio (opcional): en Vercel → tu proyecto → Settings → Domains.
+
+Notas
+-----
+- La landing NO necesita base de datos: es 100% estática, corre en
+  cualquier hosting con Node (Vercel, Netlify, Railway, VPS...).
+- El instalador descargable vive en public/downloads/ — reemplaza el
+  placeholder con tu VEXORA-Setup.exe real y actualiza las constantes
+  DOWNLOAD_URL / DOWNLOAD_NAME en src/components/vexora/download-cta.tsx.
+- Los colores y estilos están en src/app/globals.css.
+- Los textos de cada sección: src/components/vexora/*.tsx
+  (hero, features, plans, faq, footer...).
+
+Every millisecond counts. ⚡
